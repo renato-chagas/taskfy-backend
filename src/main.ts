@@ -17,8 +17,13 @@ async function bootstrap() {
   SwaggerModule.setup('docs', app, document);
 
   // Sua configuração de CORS mantida intacta
+  const allowedOrigins = [
+    'http://localhost:5173',
+    'https://taskfy-frontend-rho.vercel.app',
+  ];
+
   app.enableCors({
-    origin: 'http://localhost:5173',
+    origin: allowedOrigins,
   });
 
   await app.listen(process.env.PORT ?? 3000);
