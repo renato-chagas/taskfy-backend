@@ -77,7 +77,11 @@ export class WorldsService {
     });
 
     if (existingMember) {
-      throw new ConflictException('Você já é um membro deste mundo.');
+      // Em vez de ConflictException, retornamos sucesso com o ID para o front redirecionar direto!
+      return {
+        message: `Você já faz parte do mundo ${world.name}!`, 
+        worldId: world.id
+      };
     }
 
     await this.prisma.worldMember.create({
