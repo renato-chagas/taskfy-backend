@@ -48,12 +48,17 @@ export type World = Prisma.WorldModel
  */
 export type WorldMember = Prisma.WorldMemberModel
 /**
- * Model Task
+ * Model WorldBan
  * 
  */
-export type Task = Prisma.TaskModel
+export type WorldBan = Prisma.WorldBanModel
 /**
  * Model Category
  * 
  */
 export type Category = Prisma.CategoryModel
+/**
+ * Model Task
+ * 
+ */
+export type Task = Prisma.TaskModel

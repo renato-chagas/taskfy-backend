@@ -1,0 +1,165 @@
+// ==========================================
+// CONFIGURAÇÃO DO PRISMA CLIENT E DATASOURCE
+// ==========================================
+generator client {
+  provider     = "prisma-client-js"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ==========================================
+// MODELO DE USUÁRIOS
+// ==========================================
+model User {
+  id       String @id @default(cuid())
+  nickname String @unique
+  password String // Senha criptografada (bcrypt)
+
+  // Relacionamentos
+  worlds WorldMember[] // Mundos que o jogador participa
+  tasks  Task[] // Tarefas que ele assumiu/foi designado
+  votes  Vote[] // Votos em enquetes
+  bans   WorldBan[] // Registros de banimento em mundos
+}
+
+// ==========================================
+// ENUMS (CARGOS E STATUS)
+// ==========================================
+enum Role {
+  OWNER // Criador (poder supremo + exclusão do mundo)
+  ADMIN // Administrador (gerencia membros, cargos, banimentos)
+  MODERATOR // Moderador (auxilia na moderação e desbanimento)
+  MEMBER // Membro comum (interage apenas com tarefas)
+}
+
+enum TaskStatus {
+  TODO // A fazer
+  DOING // Em progresso
+  DONE // Concluído
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+// ==========================================
+// SISTEMA DE ENQUETES (POLLS)
+// ==========================================
+model Poll {
+  id        String       @id @default(cuid())
+  question  String
+  worldId   String
+  world     World        @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  options   PollOption[]
+  createdAt DateTime     @default(now())
+}
+
+model PollOption {
+  id     String @id @default(cuid())
+  text   String
+  pollId String
+  poll   Poll   @relation(fields: [pollId], references: [id], onDelete: Cascade)
+  votes  Vote[]
+}
+
+model Vote {
+  id       String     @id @default(cuid())
+  optionId String
+  option   PollOption @relation(fields: [optionId], references: [id], onDelete: Cascade)
+  userId   String
+  user     User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, optionId]) // Garante que o usuário vota apenas uma vez por opção/enquete
+}
+
+// ==========================================
+// SISTEMA DE MUNDOS (SERVIDORES / PROJETOS)
+// ==========================================
+model World {
+  id         String @id @default(cuid())
+  name       String
+  inviteCode String @unique @default(cuid())
+  ownerId    String // ID do usuário criador do mundo
+
+  // Relacionamentos
+  members    WorldMember[]
+  tasks      Task[]
+  polls      Poll[]
+  categories Category[]
+  bans       WorldBan[]
+}
+
+// Tabela intermediária de Membros com Cargos (Role)
+model WorldMember {
+  id      String @id @default(cuid())
+  userId  String
+  worldId String
+  role    Role   @default(MEMBER)
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  world World @relation(fields: [worldId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, worldId]) // Impede que o usuário entre duas vezes no mesmo mundo
+}
+
+// Tabela de Banimentos por Mundo
+model WorldBan {
+  id      String @id @default(cuid())
+  userId  String
+  worldId String
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  world World @relation(fields: [worldId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, worldId]) // Garante que o usuário só possui um registro de banimento por mundo
+}
+
+// ==========================================
+// SISTEMA DE TAREFAS E CATEGORIAS
+// ==========================================
+model Category {
+  id    String @id @default(cuid())
+  name  String @unique
+  color String
+
+  worldId String
+  world   World  @relation(fields: [worldId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tasks Task[]
+}
+
+model Task {
+  id          String  @id @default(cuid())
+  title       String
+  description String?
+
+  // Sistema de recursos / blocos necessários
+  hasResources Boolean @default(false)
+  resources    String? // Texto ou JSON com os itens necessários
+
+  status   TaskStatus   @default(TODO)
+  priority TaskPriority @default(MEDIUM)
+
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  worldId String
+  world   World  @relation(fields: [worldId], references: [id], onDelete: Cascade)
+
+  // Usuário responsável pela tarefa (Atribuído)
+  assigneeId String?
+  assignee   User?   @relation(fields: [assigneeId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

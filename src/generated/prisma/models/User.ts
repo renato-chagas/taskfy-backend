@@ -169,6 +169,7 @@ export type UserWhereInput = {
   worlds?: Prisma.WorldMemberListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
   votes?: Prisma.VoteListRelationFilter
+  bans?: Prisma.WorldBanListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -178,6 +179,7 @@ export type UserOrderByWithRelationInput = {
   worlds?: Prisma.WorldMemberOrderByRelationAggregateInput
   tasks?: Prisma.TaskOrderByRelationAggregateInput
   votes?: Prisma.VoteOrderByRelationAggregateInput
+  bans?: Prisma.WorldBanOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -190,6 +192,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   worlds?: Prisma.WorldMemberListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
   votes?: Prisma.VoteListRelationFilter
+  bans?: Prisma.WorldBanListRelationFilter
 }, "id" | "nickname">
 
 export type UserOrderByWithAggregationInput = {
@@ -217,6 +220,7 @@ export type UserCreateInput = {
   worlds?: Prisma.WorldMemberCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
+  bans?: Prisma.WorldBanCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -226,6 +230,7 @@ export type UserUncheckedCreateInput = {
   worlds?: Prisma.WorldMemberUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
+  bans?: Prisma.WorldBanUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -235,6 +240,7 @@ export type UserUpdateInput = {
   worlds?: Prisma.WorldMemberUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
+  bans?: Prisma.WorldBanUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -244,6 +250,7 @@ export type UserUncheckedUpdateInput = {
   worlds?: Prisma.WorldMemberUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
+  bans?: Prisma.WorldBanUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -324,6 +331,20 @@ export type UserUpdateOneRequiredWithoutWorldsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutWorldsInput, Prisma.UserUpdateWithoutWorldsInput>, Prisma.UserUncheckedUpdateWithoutWorldsInput>
 }
 
+export type UserCreateNestedOneWithoutBansInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBansInput, Prisma.UserUncheckedCreateWithoutBansInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBansInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutBansNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBansInput, Prisma.UserUncheckedCreateWithoutBansInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBansInput
+  upsert?: Prisma.UserUpsertWithoutBansInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBansInput, Prisma.UserUpdateWithoutBansInput>, Prisma.UserUncheckedUpdateWithoutBansInput>
+}
+
 export type UserCreateNestedOneWithoutTasksInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutTasksInput, Prisma.UserUncheckedCreateWithoutTasksInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutTasksInput
@@ -346,6 +367,7 @@ export type UserCreateWithoutVotesInput = {
   password: string
   worlds?: Prisma.WorldMemberCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
+  bans?: Prisma.WorldBanCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutVotesInput = {
@@ -354,6 +376,7 @@ export type UserUncheckedCreateWithoutVotesInput = {
   password: string
   worlds?: Prisma.WorldMemberUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
+  bans?: Prisma.WorldBanUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutVotesInput = {
@@ -378,6 +401,7 @@ export type UserUpdateWithoutVotesInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   worlds?: Prisma.WorldMemberUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
+  bans?: Prisma.WorldBanUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVotesInput = {
@@ -386,6 +410,7 @@ export type UserUncheckedUpdateWithoutVotesInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   worlds?: Prisma.WorldMemberUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
+  bans?: Prisma.WorldBanUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWorldsInput = {
@@ -394,6 +419,7 @@ export type UserCreateWithoutWorldsInput = {
   password: string
   tasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
+  bans?: Prisma.WorldBanCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWorldsInput = {
@@ -402,6 +428,7 @@ export type UserUncheckedCreateWithoutWorldsInput = {
   password: string
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
+  bans?: Prisma.WorldBanUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWorldsInput = {
@@ -426,12 +453,66 @@ export type UserUpdateWithoutWorldsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   tasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
+  bans?: Prisma.WorldBanUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWorldsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
+  bans?: Prisma.WorldBanUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutBansInput = {
+  id?: string
+  nickname: string
+  password: string
+  worlds?: Prisma.WorldMemberCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
+  votes?: Prisma.VoteCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutBansInput = {
+  id?: string
+  nickname: string
+  password: string
+  worlds?: Prisma.WorldMemberUncheckedCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutBansInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutBansInput, Prisma.UserUncheckedCreateWithoutBansInput>
+}
+
+export type UserUpsertWithoutBansInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBansInput, Prisma.UserUncheckedUpdateWithoutBansInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBansInput, Prisma.UserUncheckedCreateWithoutBansInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBansInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBansInput, Prisma.UserUncheckedUpdateWithoutBansInput>
+}
+
+export type UserUpdateWithoutBansInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nickname?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  worlds?: Prisma.WorldMemberUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBansInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nickname?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  worlds?: Prisma.WorldMemberUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -442,6 +523,7 @@ export type UserCreateWithoutTasksInput = {
   password: string
   worlds?: Prisma.WorldMemberCreateNestedManyWithoutUserInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
+  bans?: Prisma.WorldBanCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTasksInput = {
@@ -450,6 +532,7 @@ export type UserUncheckedCreateWithoutTasksInput = {
   password: string
   worlds?: Prisma.WorldMemberUncheckedCreateNestedManyWithoutUserInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
+  bans?: Prisma.WorldBanUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTasksInput = {
@@ -474,6 +557,7 @@ export type UserUpdateWithoutTasksInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   worlds?: Prisma.WorldMemberUpdateManyWithoutUserNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
+  bans?: Prisma.WorldBanUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTasksInput = {
@@ -482,6 +566,7 @@ export type UserUncheckedUpdateWithoutTasksInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   worlds?: Prisma.WorldMemberUncheckedUpdateManyWithoutUserNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
+  bans?: Prisma.WorldBanUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -493,12 +578,14 @@ export type UserCountOutputType = {
   worlds: number
   tasks: number
   votes: number
+  bans: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   worlds?: boolean | UserCountOutputTypeCountWorldsArgs
   tasks?: boolean | UserCountOutputTypeCountTasksArgs
   votes?: boolean | UserCountOutputTypeCountVotesArgs
+  bans?: boolean | UserCountOutputTypeCountBansArgs
 }
 
 /**
@@ -532,6 +619,13 @@ export type UserCountOutputTypeCountVotesArgs<ExtArgs extends runtime.Types.Exte
   where?: Prisma.VoteWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountBansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WorldBanWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -540,6 +634,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   worlds?: boolean | Prisma.User$worldsArgs<ExtArgs>
   tasks?: boolean | Prisma.User$tasksArgs<ExtArgs>
   votes?: boolean | Prisma.User$votesArgs<ExtArgs>
+  bans?: boolean | Prisma.User$bansArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -566,6 +661,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   worlds?: boolean | Prisma.User$worldsArgs<ExtArgs>
   tasks?: boolean | Prisma.User$tasksArgs<ExtArgs>
   votes?: boolean | Prisma.User$votesArgs<ExtArgs>
+  bans?: boolean | Prisma.User$bansArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -577,6 +673,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     worlds: Prisma.$WorldMemberPayload<ExtArgs>[]
     tasks: Prisma.$TaskPayload<ExtArgs>[]
     votes: Prisma.$VotePayload<ExtArgs>[]
+    bans: Prisma.$WorldBanPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -979,6 +1076,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   worlds<T extends Prisma.User$worldsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$worldsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorldMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tasks<T extends Prisma.User$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   votes<T extends Prisma.User$votesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$votesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  bans<T extends Prisma.User$bansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorldBanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1473,6 +1571,30 @@ export type User$votesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.VoteScalarFieldEnum | Prisma.VoteScalarFieldEnum[]
+}
+
+/**
+ * User.bans
+ */
+export type User$bansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WorldBan
+   */
+  select?: Prisma.WorldBanSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WorldBan
+   */
+  omit?: Prisma.WorldBanOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WorldBanInclude<ExtArgs> | null
+  where?: Prisma.WorldBanWhereInput
+  orderBy?: Prisma.WorldBanOrderByWithRelationInput | Prisma.WorldBanOrderByWithRelationInput[]
+  cursor?: Prisma.WorldBanWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WorldBanScalarFieldEnum | Prisma.WorldBanScalarFieldEnum[]
 }
 
 /**

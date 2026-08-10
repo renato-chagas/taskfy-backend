@@ -559,22 +559,6 @@ export type TaskUncheckedUpdateManyWithoutWorldNestedInput = {
   deleteMany?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
-export type EnumTaskStatusFieldUpdateOperationsInput = {
-  set?: $Enums.TaskStatus
-}
-
-export type EnumTaskPriorityFieldUpdateOperationsInput = {
-  set?: $Enums.TaskPriority
-}
-
 export type TaskCreateNestedManyWithoutCategoryInput = {
   create?: Prisma.XOR<Prisma.TaskCreateWithoutCategoryInput, Prisma.TaskUncheckedCreateWithoutCategoryInput> | Prisma.TaskCreateWithoutCategoryInput[] | Prisma.TaskUncheckedCreateWithoutCategoryInput[]
   connectOrCreate?: Prisma.TaskCreateOrConnectWithoutCategoryInput | Prisma.TaskCreateOrConnectWithoutCategoryInput[]
@@ -615,6 +599,22 @@ export type TaskUncheckedUpdateManyWithoutCategoryNestedInput = {
   update?: Prisma.TaskUpdateWithWhereUniqueWithoutCategoryInput | Prisma.TaskUpdateWithWhereUniqueWithoutCategoryInput[]
   updateMany?: Prisma.TaskUpdateManyWithWhereWithoutCategoryInput | Prisma.TaskUpdateManyWithWhereWithoutCategoryInput[]
   deleteMany?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
+export type EnumTaskStatusFieldUpdateOperationsInput = {
+  set?: $Enums.TaskStatus
+}
+
+export type EnumTaskPriorityFieldUpdateOperationsInput = {
+  set?: $Enums.TaskPriority
 }
 
 export type TaskCreateWithoutAssigneeInput = {

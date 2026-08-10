@@ -28,18 +28,21 @@ export type WorldMinAggregateOutputType = {
   id: string | null
   name: string | null
   inviteCode: string | null
+  ownerId: string | null
 }
 
 export type WorldMaxAggregateOutputType = {
   id: string | null
   name: string | null
   inviteCode: string | null
+  ownerId: string | null
 }
 
 export type WorldCountAggregateOutputType = {
   id: number
   name: number
   inviteCode: number
+  ownerId: number
   _all: number
 }
 
@@ -48,18 +51,21 @@ export type WorldMinAggregateInputType = {
   id?: true
   name?: true
   inviteCode?: true
+  ownerId?: true
 }
 
 export type WorldMaxAggregateInputType = {
   id?: true
   name?: true
   inviteCode?: true
+  ownerId?: true
 }
 
 export type WorldCountAggregateInputType = {
   id?: true
   name?: true
   inviteCode?: true
+  ownerId?: true
   _all?: true
 }
 
@@ -139,6 +145,7 @@ export type WorldGroupByOutputType = {
   id: string
   name: string
   inviteCode: string
+  ownerId: string
   _count: WorldCountAggregateOutputType | null
   _min: WorldMinAggregateOutputType | null
   _max: WorldMaxAggregateOutputType | null
@@ -166,20 +173,24 @@ export type WorldWhereInput = {
   id?: Prisma.StringFilter<"World"> | string
   name?: Prisma.StringFilter<"World"> | string
   inviteCode?: Prisma.StringFilter<"World"> | string
+  ownerId?: Prisma.StringFilter<"World"> | string
   members?: Prisma.WorldMemberListRelationFilter
-  categories?: Prisma.CategoryListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
   polls?: Prisma.PollListRelationFilter
+  categories?: Prisma.CategoryListRelationFilter
+  bans?: Prisma.WorldBanListRelationFilter
 }
 
 export type WorldOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   inviteCode?: Prisma.SortOrder
+  ownerId?: Prisma.SortOrder
   members?: Prisma.WorldMemberOrderByRelationAggregateInput
-  categories?: Prisma.CategoryOrderByRelationAggregateInput
   tasks?: Prisma.TaskOrderByRelationAggregateInput
   polls?: Prisma.PollOrderByRelationAggregateInput
+  categories?: Prisma.CategoryOrderByRelationAggregateInput
+  bans?: Prisma.WorldBanOrderByRelationAggregateInput
 }
 
 export type WorldWhereUniqueInput = Prisma.AtLeast<{
@@ -189,16 +200,19 @@ export type WorldWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.WorldWhereInput[]
   NOT?: Prisma.WorldWhereInput | Prisma.WorldWhereInput[]
   name?: Prisma.StringFilter<"World"> | string
+  ownerId?: Prisma.StringFilter<"World"> | string
   members?: Prisma.WorldMemberListRelationFilter
-  categories?: Prisma.CategoryListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
   polls?: Prisma.PollListRelationFilter
+  categories?: Prisma.CategoryListRelationFilter
+  bans?: Prisma.WorldBanListRelationFilter
 }, "id" | "inviteCode">
 
 export type WorldOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   inviteCode?: Prisma.SortOrder
+  ownerId?: Prisma.SortOrder
   _count?: Prisma.WorldCountOrderByAggregateInput
   _max?: Prisma.WorldMaxOrderByAggregateInput
   _min?: Prisma.WorldMinOrderByAggregateInput
@@ -211,64 +225,76 @@ export type WorldScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"World"> | string
   name?: Prisma.StringWithAggregatesFilter<"World"> | string
   inviteCode?: Prisma.StringWithAggregatesFilter<"World"> | string
+  ownerId?: Prisma.StringWithAggregatesFilter<"World"> | string
 }
 
 export type WorldCreateInput = {
   id?: string
   name: string
   inviteCode?: string
+  ownerId: string
   members?: Prisma.WorldMemberCreateNestedManyWithoutWorldInput
-  categories?: Prisma.CategoryCreateNestedManyWithoutWorldInput
   tasks?: Prisma.TaskCreateNestedManyWithoutWorldInput
   polls?: Prisma.PollCreateNestedManyWithoutWorldInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutWorldInput
+  bans?: Prisma.WorldBanCreateNestedManyWithoutWorldInput
 }
 
 export type WorldUncheckedCreateInput = {
   id?: string
   name: string
   inviteCode?: string
+  ownerId: string
   members?: Prisma.WorldMemberUncheckedCreateNestedManyWithoutWorldInput
-  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutWorldInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutWorldInput
   polls?: Prisma.PollUncheckedCreateNestedManyWithoutWorldInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutWorldInput
+  bans?: Prisma.WorldBanUncheckedCreateNestedManyWithoutWorldInput
 }
 
 export type WorldUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   members?: Prisma.WorldMemberUpdateManyWithoutWorldNestedInput
-  categories?: Prisma.CategoryUpdateManyWithoutWorldNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutWorldNestedInput
   polls?: Prisma.PollUpdateManyWithoutWorldNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutWorldNestedInput
+  bans?: Prisma.WorldBanUpdateManyWithoutWorldNestedInput
 }
 
 export type WorldUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   members?: Prisma.WorldMemberUncheckedUpdateManyWithoutWorldNestedInput
-  categories?: Prisma.CategoryUncheckedUpdateManyWithoutWorldNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutWorldNestedInput
   polls?: Prisma.PollUncheckedUpdateManyWithoutWorldNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutWorldNestedInput
+  bans?: Prisma.WorldBanUncheckedUpdateManyWithoutWorldNestedInput
 }
 
 export type WorldCreateManyInput = {
   id?: string
   name: string
   inviteCode?: string
+  ownerId: string
 }
 
 export type WorldUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type WorldUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type WorldScalarRelationFilter = {
@@ -280,18 +306,21 @@ export type WorldCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   inviteCode?: Prisma.SortOrder
+  ownerId?: Prisma.SortOrder
 }
 
 export type WorldMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   inviteCode?: Prisma.SortOrder
+  ownerId?: Prisma.SortOrder
 }
 
 export type WorldMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   inviteCode?: Prisma.SortOrder
+  ownerId?: Prisma.SortOrder
 }
 
 export type WorldCreateNestedOneWithoutPollsInput = {
@@ -322,18 +351,18 @@ export type WorldUpdateOneRequiredWithoutMembersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.WorldUpdateToOneWithWhereWithoutMembersInput, Prisma.WorldUpdateWithoutMembersInput>, Prisma.WorldUncheckedUpdateWithoutMembersInput>
 }
 
-export type WorldCreateNestedOneWithoutTasksInput = {
-  create?: Prisma.XOR<Prisma.WorldCreateWithoutTasksInput, Prisma.WorldUncheckedCreateWithoutTasksInput>
-  connectOrCreate?: Prisma.WorldCreateOrConnectWithoutTasksInput
+export type WorldCreateNestedOneWithoutBansInput = {
+  create?: Prisma.XOR<Prisma.WorldCreateWithoutBansInput, Prisma.WorldUncheckedCreateWithoutBansInput>
+  connectOrCreate?: Prisma.WorldCreateOrConnectWithoutBansInput
   connect?: Prisma.WorldWhereUniqueInput
 }
 
-export type WorldUpdateOneRequiredWithoutTasksNestedInput = {
-  create?: Prisma.XOR<Prisma.WorldCreateWithoutTasksInput, Prisma.WorldUncheckedCreateWithoutTasksInput>
-  connectOrCreate?: Prisma.WorldCreateOrConnectWithoutTasksInput
-  upsert?: Prisma.WorldUpsertWithoutTasksInput
+export type WorldUpdateOneRequiredWithoutBansNestedInput = {
+  create?: Prisma.XOR<Prisma.WorldCreateWithoutBansInput, Prisma.WorldUncheckedCreateWithoutBansInput>
+  connectOrCreate?: Prisma.WorldCreateOrConnectWithoutBansInput
+  upsert?: Prisma.WorldUpsertWithoutBansInput
   connect?: Prisma.WorldWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.WorldUpdateToOneWithWhereWithoutTasksInput, Prisma.WorldUpdateWithoutTasksInput>, Prisma.WorldUncheckedUpdateWithoutTasksInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.WorldUpdateToOneWithWhereWithoutBansInput, Prisma.WorldUpdateWithoutBansInput>, Prisma.WorldUncheckedUpdateWithoutBansInput>
 }
 
 export type WorldCreateNestedOneWithoutCategoriesInput = {
@@ -350,22 +379,40 @@ export type WorldUpdateOneRequiredWithoutCategoriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.WorldUpdateToOneWithWhereWithoutCategoriesInput, Prisma.WorldUpdateWithoutCategoriesInput>, Prisma.WorldUncheckedUpdateWithoutCategoriesInput>
 }
 
+export type WorldCreateNestedOneWithoutTasksInput = {
+  create?: Prisma.XOR<Prisma.WorldCreateWithoutTasksInput, Prisma.WorldUncheckedCreateWithoutTasksInput>
+  connectOrCreate?: Prisma.WorldCreateOrConnectWithoutTasksInput
+  connect?: Prisma.WorldWhereUniqueInput
+}
+
+export type WorldUpdateOneRequiredWithoutTasksNestedInput = {
+  create?: Prisma.XOR<Prisma.WorldCreateWithoutTasksInput, Prisma.WorldUncheckedCreateWithoutTasksInput>
+  connectOrCreate?: Prisma.WorldCreateOrConnectWithoutTasksInput
+  upsert?: Prisma.WorldUpsertWithoutTasksInput
+  connect?: Prisma.WorldWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.WorldUpdateToOneWithWhereWithoutTasksInput, Prisma.WorldUpdateWithoutTasksInput>, Prisma.WorldUncheckedUpdateWithoutTasksInput>
+}
+
 export type WorldCreateWithoutPollsInput = {
   id?: string
   name: string
   inviteCode?: string
+  ownerId: string
   members?: Prisma.WorldMemberCreateNestedManyWithoutWorldInput
-  categories?: Prisma.CategoryCreateNestedManyWithoutWorldInput
   tasks?: Prisma.TaskCreateNestedManyWithoutWorldInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutWorldInput
+  bans?: Prisma.WorldBanCreateNestedManyWithoutWorldInput
 }
 
 export type WorldUncheckedCreateWithoutPollsInput = {
   id?: string
   name: string
   inviteCode?: string
+  ownerId: string
   members?: Prisma.WorldMemberUncheckedCreateNestedManyWithoutWorldInput
-  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutWorldInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutWorldInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutWorldInput
+  bans?: Prisma.WorldBanUncheckedCreateNestedManyWithoutWorldInput
 }
 
 export type WorldCreateOrConnectWithoutPollsInput = {
@@ -388,36 +435,44 @@ export type WorldUpdateWithoutPollsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   members?: Prisma.WorldMemberUpdateManyWithoutWorldNestedInput
-  categories?: Prisma.CategoryUpdateManyWithoutWorldNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutWorldNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutWorldNestedInput
+  bans?: Prisma.WorldBanUpdateManyWithoutWorldNestedInput
 }
 
 export type WorldUncheckedUpdateWithoutPollsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   members?: Prisma.WorldMemberUncheckedUpdateManyWithoutWorldNestedInput
-  categories?: Prisma.CategoryUncheckedUpdateManyWithoutWorldNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutWorldNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutWorldNestedInput
+  bans?: Prisma.WorldBanUncheckedUpdateManyWithoutWorldNestedInput
 }
 
 export type WorldCreateWithoutMembersInput = {
   id?: string
   name: string
   inviteCode?: string
-  categories?: Prisma.CategoryCreateNestedManyWithoutWorldInput
+  ownerId: string
   tasks?: Prisma.TaskCreateNestedManyWithoutWorldInput
   polls?: Prisma.PollCreateNestedManyWithoutWorldInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutWorldInput
+  bans?: Prisma.WorldBanCreateNestedManyWithoutWorldInput
 }
 
 export type WorldUncheckedCreateWithoutMembersInput = {
   id?: string
   name: string
   inviteCode?: string
-  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutWorldInput
+  ownerId: string
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutWorldInput
   polls?: Prisma.PollUncheckedCreateNestedManyWithoutWorldInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutWorldInput
+  bans?: Prisma.WorldBanUncheckedCreateNestedManyWithoutWorldInput
 }
 
 export type WorldCreateOrConnectWithoutMembersInput = {
@@ -440,88 +495,104 @@ export type WorldUpdateWithoutMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
-  categories?: Prisma.CategoryUpdateManyWithoutWorldNestedInput
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   tasks?: Prisma.TaskUpdateManyWithoutWorldNestedInput
   polls?: Prisma.PollUpdateManyWithoutWorldNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutWorldNestedInput
+  bans?: Prisma.WorldBanUpdateManyWithoutWorldNestedInput
 }
 
 export type WorldUncheckedUpdateWithoutMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
-  categories?: Prisma.CategoryUncheckedUpdateManyWithoutWorldNestedInput
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutWorldNestedInput
   polls?: Prisma.PollUncheckedUpdateManyWithoutWorldNestedInput
-}
-
-export type WorldCreateWithoutTasksInput = {
-  id?: string
-  name: string
-  inviteCode?: string
-  members?: Prisma.WorldMemberCreateNestedManyWithoutWorldInput
-  categories?: Prisma.CategoryCreateNestedManyWithoutWorldInput
-  polls?: Prisma.PollCreateNestedManyWithoutWorldInput
-}
-
-export type WorldUncheckedCreateWithoutTasksInput = {
-  id?: string
-  name: string
-  inviteCode?: string
-  members?: Prisma.WorldMemberUncheckedCreateNestedManyWithoutWorldInput
-  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutWorldInput
-  polls?: Prisma.PollUncheckedCreateNestedManyWithoutWorldInput
-}
-
-export type WorldCreateOrConnectWithoutTasksInput = {
-  where: Prisma.WorldWhereUniqueInput
-  create: Prisma.XOR<Prisma.WorldCreateWithoutTasksInput, Prisma.WorldUncheckedCreateWithoutTasksInput>
-}
-
-export type WorldUpsertWithoutTasksInput = {
-  update: Prisma.XOR<Prisma.WorldUpdateWithoutTasksInput, Prisma.WorldUncheckedUpdateWithoutTasksInput>
-  create: Prisma.XOR<Prisma.WorldCreateWithoutTasksInput, Prisma.WorldUncheckedCreateWithoutTasksInput>
-  where?: Prisma.WorldWhereInput
-}
-
-export type WorldUpdateToOneWithWhereWithoutTasksInput = {
-  where?: Prisma.WorldWhereInput
-  data: Prisma.XOR<Prisma.WorldUpdateWithoutTasksInput, Prisma.WorldUncheckedUpdateWithoutTasksInput>
-}
-
-export type WorldUpdateWithoutTasksInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
-  members?: Prisma.WorldMemberUpdateManyWithoutWorldNestedInput
-  categories?: Prisma.CategoryUpdateManyWithoutWorldNestedInput
-  polls?: Prisma.PollUpdateManyWithoutWorldNestedInput
-}
-
-export type WorldUncheckedUpdateWithoutTasksInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
-  members?: Prisma.WorldMemberUncheckedUpdateManyWithoutWorldNestedInput
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutWorldNestedInput
+  bans?: Prisma.WorldBanUncheckedUpdateManyWithoutWorldNestedInput
+}
+
+export type WorldCreateWithoutBansInput = {
+  id?: string
+  name: string
+  inviteCode?: string
+  ownerId: string
+  members?: Prisma.WorldMemberCreateNestedManyWithoutWorldInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutWorldInput
+  polls?: Prisma.PollCreateNestedManyWithoutWorldInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutWorldInput
+}
+
+export type WorldUncheckedCreateWithoutBansInput = {
+  id?: string
+  name: string
+  inviteCode?: string
+  ownerId: string
+  members?: Prisma.WorldMemberUncheckedCreateNestedManyWithoutWorldInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutWorldInput
+  polls?: Prisma.PollUncheckedCreateNestedManyWithoutWorldInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutWorldInput
+}
+
+export type WorldCreateOrConnectWithoutBansInput = {
+  where: Prisma.WorldWhereUniqueInput
+  create: Prisma.XOR<Prisma.WorldCreateWithoutBansInput, Prisma.WorldUncheckedCreateWithoutBansInput>
+}
+
+export type WorldUpsertWithoutBansInput = {
+  update: Prisma.XOR<Prisma.WorldUpdateWithoutBansInput, Prisma.WorldUncheckedUpdateWithoutBansInput>
+  create: Prisma.XOR<Prisma.WorldCreateWithoutBansInput, Prisma.WorldUncheckedCreateWithoutBansInput>
+  where?: Prisma.WorldWhereInput
+}
+
+export type WorldUpdateToOneWithWhereWithoutBansInput = {
+  where?: Prisma.WorldWhereInput
+  data: Prisma.XOR<Prisma.WorldUpdateWithoutBansInput, Prisma.WorldUncheckedUpdateWithoutBansInput>
+}
+
+export type WorldUpdateWithoutBansInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  members?: Prisma.WorldMemberUpdateManyWithoutWorldNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutWorldNestedInput
+  polls?: Prisma.PollUpdateManyWithoutWorldNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutWorldNestedInput
+}
+
+export type WorldUncheckedUpdateWithoutBansInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  members?: Prisma.WorldMemberUncheckedUpdateManyWithoutWorldNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutWorldNestedInput
   polls?: Prisma.PollUncheckedUpdateManyWithoutWorldNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutWorldNestedInput
 }
 
 export type WorldCreateWithoutCategoriesInput = {
   id?: string
   name: string
   inviteCode?: string
+  ownerId: string
   members?: Prisma.WorldMemberCreateNestedManyWithoutWorldInput
   tasks?: Prisma.TaskCreateNestedManyWithoutWorldInput
   polls?: Prisma.PollCreateNestedManyWithoutWorldInput
+  bans?: Prisma.WorldBanCreateNestedManyWithoutWorldInput
 }
 
 export type WorldUncheckedCreateWithoutCategoriesInput = {
   id?: string
   name: string
   inviteCode?: string
+  ownerId: string
   members?: Prisma.WorldMemberUncheckedCreateNestedManyWithoutWorldInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutWorldInput
   polls?: Prisma.PollUncheckedCreateNestedManyWithoutWorldInput
+  bans?: Prisma.WorldBanUncheckedCreateNestedManyWithoutWorldInput
 }
 
 export type WorldCreateOrConnectWithoutCategoriesInput = {
@@ -544,18 +615,82 @@ export type WorldUpdateWithoutCategoriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   members?: Prisma.WorldMemberUpdateManyWithoutWorldNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutWorldNestedInput
   polls?: Prisma.PollUpdateManyWithoutWorldNestedInput
+  bans?: Prisma.WorldBanUpdateManyWithoutWorldNestedInput
 }
 
 export type WorldUncheckedUpdateWithoutCategoriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   members?: Prisma.WorldMemberUncheckedUpdateManyWithoutWorldNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutWorldNestedInput
   polls?: Prisma.PollUncheckedUpdateManyWithoutWorldNestedInput
+  bans?: Prisma.WorldBanUncheckedUpdateManyWithoutWorldNestedInput
+}
+
+export type WorldCreateWithoutTasksInput = {
+  id?: string
+  name: string
+  inviteCode?: string
+  ownerId: string
+  members?: Prisma.WorldMemberCreateNestedManyWithoutWorldInput
+  polls?: Prisma.PollCreateNestedManyWithoutWorldInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutWorldInput
+  bans?: Prisma.WorldBanCreateNestedManyWithoutWorldInput
+}
+
+export type WorldUncheckedCreateWithoutTasksInput = {
+  id?: string
+  name: string
+  inviteCode?: string
+  ownerId: string
+  members?: Prisma.WorldMemberUncheckedCreateNestedManyWithoutWorldInput
+  polls?: Prisma.PollUncheckedCreateNestedManyWithoutWorldInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutWorldInput
+  bans?: Prisma.WorldBanUncheckedCreateNestedManyWithoutWorldInput
+}
+
+export type WorldCreateOrConnectWithoutTasksInput = {
+  where: Prisma.WorldWhereUniqueInput
+  create: Prisma.XOR<Prisma.WorldCreateWithoutTasksInput, Prisma.WorldUncheckedCreateWithoutTasksInput>
+}
+
+export type WorldUpsertWithoutTasksInput = {
+  update: Prisma.XOR<Prisma.WorldUpdateWithoutTasksInput, Prisma.WorldUncheckedUpdateWithoutTasksInput>
+  create: Prisma.XOR<Prisma.WorldCreateWithoutTasksInput, Prisma.WorldUncheckedCreateWithoutTasksInput>
+  where?: Prisma.WorldWhereInput
+}
+
+export type WorldUpdateToOneWithWhereWithoutTasksInput = {
+  where?: Prisma.WorldWhereInput
+  data: Prisma.XOR<Prisma.WorldUpdateWithoutTasksInput, Prisma.WorldUncheckedUpdateWithoutTasksInput>
+}
+
+export type WorldUpdateWithoutTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  members?: Prisma.WorldMemberUpdateManyWithoutWorldNestedInput
+  polls?: Prisma.PollUpdateManyWithoutWorldNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutWorldNestedInput
+  bans?: Prisma.WorldBanUpdateManyWithoutWorldNestedInput
+}
+
+export type WorldUncheckedUpdateWithoutTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  members?: Prisma.WorldMemberUncheckedUpdateManyWithoutWorldNestedInput
+  polls?: Prisma.PollUncheckedUpdateManyWithoutWorldNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutWorldNestedInput
+  bans?: Prisma.WorldBanUncheckedUpdateManyWithoutWorldNestedInput
 }
 
 
@@ -565,16 +700,18 @@ export type WorldUncheckedUpdateWithoutCategoriesInput = {
 
 export type WorldCountOutputType = {
   members: number
-  categories: number
   tasks: number
   polls: number
+  categories: number
+  bans: number
 }
 
 export type WorldCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   members?: boolean | WorldCountOutputTypeCountMembersArgs
-  categories?: boolean | WorldCountOutputTypeCountCategoriesArgs
   tasks?: boolean | WorldCountOutputTypeCountTasksArgs
   polls?: boolean | WorldCountOutputTypeCountPollsArgs
+  categories?: boolean | WorldCountOutputTypeCountCategoriesArgs
+  bans?: boolean | WorldCountOutputTypeCountBansArgs
 }
 
 /**
@@ -597,13 +734,6 @@ export type WorldCountOutputTypeCountMembersArgs<ExtArgs extends runtime.Types.E
 /**
  * WorldCountOutputType without action
  */
-export type WorldCountOutputTypeCountCategoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CategoryWhereInput
-}
-
-/**
- * WorldCountOutputType without action
- */
 export type WorldCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TaskWhereInput
 }
@@ -615,15 +745,31 @@ export type WorldCountOutputTypeCountPollsArgs<ExtArgs extends runtime.Types.Ext
   where?: Prisma.PollWhereInput
 }
 
+/**
+ * WorldCountOutputType without action
+ */
+export type WorldCountOutputTypeCountCategoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CategoryWhereInput
+}
+
+/**
+ * WorldCountOutputType without action
+ */
+export type WorldCountOutputTypeCountBansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WorldBanWhereInput
+}
+
 
 export type WorldSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   inviteCode?: boolean
+  ownerId?: boolean
   members?: boolean | Prisma.World$membersArgs<ExtArgs>
-  categories?: boolean | Prisma.World$categoriesArgs<ExtArgs>
   tasks?: boolean | Prisma.World$tasksArgs<ExtArgs>
   polls?: boolean | Prisma.World$pollsArgs<ExtArgs>
+  categories?: boolean | Prisma.World$categoriesArgs<ExtArgs>
+  bans?: boolean | Prisma.World$bansArgs<ExtArgs>
   _count?: boolean | Prisma.WorldCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["world"]>
 
@@ -631,26 +777,30 @@ export type WorldSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   name?: boolean
   inviteCode?: boolean
+  ownerId?: boolean
 }, ExtArgs["result"]["world"]>
 
 export type WorldSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   inviteCode?: boolean
+  ownerId?: boolean
 }, ExtArgs["result"]["world"]>
 
 export type WorldSelectScalar = {
   id?: boolean
   name?: boolean
   inviteCode?: boolean
+  ownerId?: boolean
 }
 
-export type WorldOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "inviteCode", ExtArgs["result"]["world"]>
+export type WorldOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "inviteCode" | "ownerId", ExtArgs["result"]["world"]>
 export type WorldInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   members?: boolean | Prisma.World$membersArgs<ExtArgs>
-  categories?: boolean | Prisma.World$categoriesArgs<ExtArgs>
   tasks?: boolean | Prisma.World$tasksArgs<ExtArgs>
   polls?: boolean | Prisma.World$pollsArgs<ExtArgs>
+  categories?: boolean | Prisma.World$categoriesArgs<ExtArgs>
+  bans?: boolean | Prisma.World$bansArgs<ExtArgs>
   _count?: boolean | Prisma.WorldCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type WorldIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -660,14 +810,16 @@ export type $WorldPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   name: "World"
   objects: {
     members: Prisma.$WorldMemberPayload<ExtArgs>[]
-    categories: Prisma.$CategoryPayload<ExtArgs>[]
     tasks: Prisma.$TaskPayload<ExtArgs>[]
     polls: Prisma.$PollPayload<ExtArgs>[]
+    categories: Prisma.$CategoryPayload<ExtArgs>[]
+    bans: Prisma.$WorldBanPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
     inviteCode: string
+    ownerId: string
   }, ExtArgs["result"]["world"]>
   composites: {}
 }
@@ -1063,9 +1215,10 @@ readonly fields: WorldFieldRefs;
 export interface Prisma__WorldClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   members<T extends Prisma.World$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.World$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorldMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  categories<T extends Prisma.World$categoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.World$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tasks<T extends Prisma.World$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.World$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   polls<T extends Prisma.World$pollsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.World$pollsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PollPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  categories<T extends Prisma.World$categoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.World$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  bans<T extends Prisma.World$bansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.World$bansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorldBanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1098,6 +1251,7 @@ export interface WorldFieldRefs {
   readonly id: Prisma.FieldRef<"World", 'String'>
   readonly name: Prisma.FieldRef<"World", 'String'>
   readonly inviteCode: Prisma.FieldRef<"World", 'String'>
+  readonly ownerId: Prisma.FieldRef<"World", 'String'>
 }
     
 
@@ -1515,30 +1669,6 @@ export type World$membersArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
- * World.categories
- */
-export type World$categoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Category
-   */
-  select?: Prisma.CategorySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Category
-   */
-  omit?: Prisma.CategoryOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CategoryInclude<ExtArgs> | null
-  where?: Prisma.CategoryWhereInput
-  orderBy?: Prisma.CategoryOrderByWithRelationInput | Prisma.CategoryOrderByWithRelationInput[]
-  cursor?: Prisma.CategoryWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.CategoryScalarFieldEnum | Prisma.CategoryScalarFieldEnum[]
-}
-
-/**
  * World.tasks
  */
 export type World$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1584,6 +1714,54 @@ export type World$pollsArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   distinct?: Prisma.PollScalarFieldEnum | Prisma.PollScalarFieldEnum[]
+}
+
+/**
+ * World.categories
+ */
+export type World$categoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Category
+   */
+  select?: Prisma.CategorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Category
+   */
+  omit?: Prisma.CategoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CategoryInclude<ExtArgs> | null
+  where?: Prisma.CategoryWhereInput
+  orderBy?: Prisma.CategoryOrderByWithRelationInput | Prisma.CategoryOrderByWithRelationInput[]
+  cursor?: Prisma.CategoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CategoryScalarFieldEnum | Prisma.CategoryScalarFieldEnum[]
+}
+
+/**
+ * World.bans
+ */
+export type World$bansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WorldBan
+   */
+  select?: Prisma.WorldBanSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WorldBan
+   */
+  omit?: Prisma.WorldBanOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WorldBanInclude<ExtArgs> | null
+  where?: Prisma.WorldBanWhereInput
+  orderBy?: Prisma.WorldBanOrderByWithRelationInput | Prisma.WorldBanOrderByWithRelationInput[]
+  cursor?: Prisma.WorldBanWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WorldBanScalarFieldEnum | Prisma.WorldBanScalarFieldEnum[]
 }
 
 /**

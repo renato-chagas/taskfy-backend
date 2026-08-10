@@ -25,35 +25,47 @@ export type AggregateWorldMember = {
 }
 
 export type WorldMemberMinAggregateOutputType = {
+  id: string | null
   userId: string | null
   worldId: string | null
+  role: $Enums.Role | null
 }
 
 export type WorldMemberMaxAggregateOutputType = {
+  id: string | null
   userId: string | null
   worldId: string | null
+  role: $Enums.Role | null
 }
 
 export type WorldMemberCountAggregateOutputType = {
+  id: number
   userId: number
   worldId: number
+  role: number
   _all: number
 }
 
 
 export type WorldMemberMinAggregateInputType = {
+  id?: true
   userId?: true
   worldId?: true
+  role?: true
 }
 
 export type WorldMemberMaxAggregateInputType = {
+  id?: true
   userId?: true
   worldId?: true
+  role?: true
 }
 
 export type WorldMemberCountAggregateInputType = {
+  id?: true
   userId?: true
   worldId?: true
+  role?: true
   _all?: true
 }
 
@@ -130,8 +142,10 @@ export type WorldMemberGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 export type WorldMemberGroupByOutputType = {
+  id: string
   userId: string
   worldId: string
+  role: $Enums.Role
   _count: WorldMemberCountAggregateOutputType | null
   _min: WorldMemberMinAggregateOutputType | null
   _max: WorldMemberMaxAggregateOutputType | null
@@ -156,33 +170,41 @@ export type WorldMemberWhereInput = {
   AND?: Prisma.WorldMemberWhereInput | Prisma.WorldMemberWhereInput[]
   OR?: Prisma.WorldMemberWhereInput[]
   NOT?: Prisma.WorldMemberWhereInput | Prisma.WorldMemberWhereInput[]
+  id?: Prisma.StringFilter<"WorldMember"> | string
   userId?: Prisma.StringFilter<"WorldMember"> | string
   worldId?: Prisma.StringFilter<"WorldMember"> | string
+  role?: Prisma.EnumRoleFilter<"WorldMember"> | $Enums.Role
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   world?: Prisma.XOR<Prisma.WorldScalarRelationFilter, Prisma.WorldWhereInput>
 }
 
 export type WorldMemberOrderByWithRelationInput = {
+  id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   worldId?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   world?: Prisma.WorldOrderByWithRelationInput
 }
 
 export type WorldMemberWhereUniqueInput = Prisma.AtLeast<{
+  id?: string
   userId_worldId?: Prisma.WorldMemberUserIdWorldIdCompoundUniqueInput
   AND?: Prisma.WorldMemberWhereInput | Prisma.WorldMemberWhereInput[]
   OR?: Prisma.WorldMemberWhereInput[]
   NOT?: Prisma.WorldMemberWhereInput | Prisma.WorldMemberWhereInput[]
   userId?: Prisma.StringFilter<"WorldMember"> | string
   worldId?: Prisma.StringFilter<"WorldMember"> | string
+  role?: Prisma.EnumRoleFilter<"WorldMember"> | $Enums.Role
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   world?: Prisma.XOR<Prisma.WorldScalarRelationFilter, Prisma.WorldWhereInput>
-}, "userId_worldId">
+}, "id" | "userId_worldId">
 
 export type WorldMemberOrderByWithAggregationInput = {
+  id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   worldId?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   _count?: Prisma.WorldMemberCountOrderByAggregateInput
   _max?: Prisma.WorldMemberMaxOrderByAggregateInput
   _min?: Prisma.WorldMemberMinOrderByAggregateInput
@@ -192,42 +214,57 @@ export type WorldMemberScalarWhereWithAggregatesInput = {
   AND?: Prisma.WorldMemberScalarWhereWithAggregatesInput | Prisma.WorldMemberScalarWhereWithAggregatesInput[]
   OR?: Prisma.WorldMemberScalarWhereWithAggregatesInput[]
   NOT?: Prisma.WorldMemberScalarWhereWithAggregatesInput | Prisma.WorldMemberScalarWhereWithAggregatesInput[]
+  id?: Prisma.StringWithAggregatesFilter<"WorldMember"> | string
   userId?: Prisma.StringWithAggregatesFilter<"WorldMember"> | string
   worldId?: Prisma.StringWithAggregatesFilter<"WorldMember"> | string
+  role?: Prisma.EnumRoleWithAggregatesFilter<"WorldMember"> | $Enums.Role
 }
 
 export type WorldMemberCreateInput = {
+  id?: string
+  role?: $Enums.Role
   user: Prisma.UserCreateNestedOneWithoutWorldsInput
   world: Prisma.WorldCreateNestedOneWithoutMembersInput
 }
 
 export type WorldMemberUncheckedCreateInput = {
+  id?: string
   userId: string
   worldId: string
+  role?: $Enums.Role
 }
 
 export type WorldMemberUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   user?: Prisma.UserUpdateOneRequiredWithoutWorldsNestedInput
   world?: Prisma.WorldUpdateOneRequiredWithoutMembersNestedInput
 }
 
 export type WorldMemberUncheckedUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   worldId?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
 }
 
 export type WorldMemberCreateManyInput = {
+  id?: string
   userId: string
   worldId: string
+  role?: $Enums.Role
 }
 
 export type WorldMemberUpdateManyMutationInput = {
-
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
 }
 
 export type WorldMemberUncheckedUpdateManyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   worldId?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
 }
 
 export type WorldMemberListRelationFilter = {
@@ -246,18 +283,24 @@ export type WorldMemberUserIdWorldIdCompoundUniqueInput = {
 }
 
 export type WorldMemberCountOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   worldId?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type WorldMemberMaxOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   worldId?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type WorldMemberMinOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   worldId?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type WorldMemberCreateNestedManyWithoutUserInput = {
@@ -344,12 +387,20 @@ export type WorldMemberUncheckedUpdateManyWithoutWorldNestedInput = {
   deleteMany?: Prisma.WorldMemberScalarWhereInput | Prisma.WorldMemberScalarWhereInput[]
 }
 
+export type EnumRoleFieldUpdateOperationsInput = {
+  set?: $Enums.Role
+}
+
 export type WorldMemberCreateWithoutUserInput = {
+  id?: string
+  role?: $Enums.Role
   world: Prisma.WorldCreateNestedOneWithoutMembersInput
 }
 
 export type WorldMemberUncheckedCreateWithoutUserInput = {
+  id?: string
   worldId: string
+  role?: $Enums.Role
 }
 
 export type WorldMemberCreateOrConnectWithoutUserInput = {
@@ -382,16 +433,22 @@ export type WorldMemberScalarWhereInput = {
   AND?: Prisma.WorldMemberScalarWhereInput | Prisma.WorldMemberScalarWhereInput[]
   OR?: Prisma.WorldMemberScalarWhereInput[]
   NOT?: Prisma.WorldMemberScalarWhereInput | Prisma.WorldMemberScalarWhereInput[]
+  id?: Prisma.StringFilter<"WorldMember"> | string
   userId?: Prisma.StringFilter<"WorldMember"> | string
   worldId?: Prisma.StringFilter<"WorldMember"> | string
+  role?: Prisma.EnumRoleFilter<"WorldMember"> | $Enums.Role
 }
 
 export type WorldMemberCreateWithoutWorldInput = {
+  id?: string
+  role?: $Enums.Role
   user: Prisma.UserCreateNestedOneWithoutWorldsInput
 }
 
 export type WorldMemberUncheckedCreateWithoutWorldInput = {
+  id?: string
   userId: string
+  role?: $Enums.Role
 }
 
 export type WorldMemberCreateOrConnectWithoutWorldInput = {
@@ -421,66 +478,90 @@ export type WorldMemberUpdateManyWithWhereWithoutWorldInput = {
 }
 
 export type WorldMemberCreateManyUserInput = {
+  id?: string
   worldId: string
+  role?: $Enums.Role
 }
 
 export type WorldMemberUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   world?: Prisma.WorldUpdateOneRequiredWithoutMembersNestedInput
 }
 
 export type WorldMemberUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   worldId?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
 }
 
 export type WorldMemberUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   worldId?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
 }
 
 export type WorldMemberCreateManyWorldInput = {
+  id?: string
   userId: string
+  role?: $Enums.Role
 }
 
 export type WorldMemberUpdateWithoutWorldInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   user?: Prisma.UserUpdateOneRequiredWithoutWorldsNestedInput
 }
 
 export type WorldMemberUncheckedUpdateWithoutWorldInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
 }
 
 export type WorldMemberUncheckedUpdateManyWithoutWorldInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
 }
 
 
 
 export type WorldMemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
   userId?: boolean
   worldId?: boolean
+  role?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   world?: boolean | Prisma.WorldDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["worldMember"]>
 
 export type WorldMemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
   userId?: boolean
   worldId?: boolean
+  role?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   world?: boolean | Prisma.WorldDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["worldMember"]>
 
 export type WorldMemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
   userId?: boolean
   worldId?: boolean
+  role?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   world?: boolean | Prisma.WorldDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["worldMember"]>
 
 export type WorldMemberSelectScalar = {
+  id?: boolean
   userId?: boolean
   worldId?: boolean
+  role?: boolean
 }
 
-export type WorldMemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"userId" | "worldId", ExtArgs["result"]["worldMember"]>
+export type WorldMemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "worldId" | "role", ExtArgs["result"]["worldMember"]>
 export type WorldMemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   world?: boolean | Prisma.WorldDefaultArgs<ExtArgs>
@@ -501,8 +582,10 @@ export type $WorldMemberPayload<ExtArgs extends runtime.Types.Extensions.Interna
     world: Prisma.$WorldPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
+    id: string
     userId: string
     worldId: string
+    role: $Enums.Role
   }, ExtArgs["result"]["worldMember"]>
   composites: {}
 }
@@ -586,8 +669,8 @@ export interface WorldMemberDelegate<ExtArgs extends runtime.Types.Extensions.In
    * // Get first 10 WorldMembers
    * const worldMembers = await prisma.worldMember.findMany({ take: 10 })
    * 
-   * // Only select the `userId`
-   * const worldMemberWithUserIdOnly = await prisma.worldMember.findMany({ select: { userId: true } })
+   * // Only select the `id`
+   * const worldMemberWithIdOnly = await prisma.worldMember.findMany({ select: { id: true } })
    * 
    */
   findMany<T extends WorldMemberFindManyArgs>(args?: Prisma.SelectSubset<T, WorldMemberFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorldMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -631,9 +714,9 @@ export interface WorldMemberDelegate<ExtArgs extends runtime.Types.Extensions.In
    *   ]
    * })
    * 
-   * // Create many WorldMembers and only return the `userId`
-   * const worldMemberWithUserIdOnly = await prisma.worldMember.createManyAndReturn({
-   *   select: { userId: true },
+   * // Create many WorldMembers and only return the `id`
+   * const worldMemberWithIdOnly = await prisma.worldMember.createManyAndReturn({
+   *   select: { id: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -722,9 +805,9 @@ export interface WorldMemberDelegate<ExtArgs extends runtime.Types.Extensions.In
    *   ]
    * })
    * 
-   * // Update zero or more WorldMembers and only return the `userId`
-   * const worldMemberWithUserIdOnly = await prisma.worldMember.updateManyAndReturn({
-   *   select: { userId: true },
+   * // Update zero or more WorldMembers and only return the `id`
+   * const worldMemberWithIdOnly = await prisma.worldMember.updateManyAndReturn({
+   *   select: { id: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -928,8 +1011,10 @@ export interface Prisma__WorldMemberClient<T, Null = never, ExtArgs extends runt
  * Fields of the WorldMember model
  */
 export interface WorldMemberFieldRefs {
+  readonly id: Prisma.FieldRef<"WorldMember", 'String'>
   readonly userId: Prisma.FieldRef<"WorldMember", 'String'>
   readonly worldId: Prisma.FieldRef<"WorldMember", 'String'>
+  readonly role: Prisma.FieldRef<"WorldMember", 'Role'>
 }
     
 

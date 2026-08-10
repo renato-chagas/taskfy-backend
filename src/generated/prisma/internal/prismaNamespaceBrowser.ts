@@ -57,8 +57,9 @@ export const ModelName = {
   Vote: 'Vote',
   World: 'World',
   WorldMember: 'WorldMember',
-  Task: 'Task',
-  Category: 'Category'
+  WorldBan: 'WorldBan',
+  Category: 'Category',
+  Task: 'Task'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -117,18 +118,42 @@ export type VoteScalarFieldEnum = (typeof VoteScalarFieldEnum)[keyof typeof Vote
 export const WorldScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  inviteCode: 'inviteCode'
+  inviteCode: 'inviteCode',
+  ownerId: 'ownerId'
 } as const
 
 export type WorldScalarFieldEnum = (typeof WorldScalarFieldEnum)[keyof typeof WorldScalarFieldEnum]
 
 
 export const WorldMemberScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  worldId: 'worldId',
+  role: 'role'
+} as const
+
+export type WorldMemberScalarFieldEnum = (typeof WorldMemberScalarFieldEnum)[keyof typeof WorldMemberScalarFieldEnum]
+
+
+export const WorldBanScalarFieldEnum = {
+  id: 'id',
   userId: 'userId',
   worldId: 'worldId'
 } as const
 
-export type WorldMemberScalarFieldEnum = (typeof WorldMemberScalarFieldEnum)[keyof typeof WorldMemberScalarFieldEnum]
+export type WorldBanScalarFieldEnum = (typeof WorldBanScalarFieldEnum)[keyof typeof WorldBanScalarFieldEnum]
+
+
+export const CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  color: 'color',
+  worldId: 'worldId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
 
 
 export const TaskScalarFieldEnum = {
@@ -147,18 +172,6 @@ export const TaskScalarFieldEnum = {
 } as const
 
 export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
-
-
-export const CategoryScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  color: 'color',
-  worldId: 'worldId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -9,6 +9,16 @@
 * 🟢 You can import this file directly.
 */
 
+export const Role = {
+  OWNER: 'OWNER',
+  ADMIN: 'ADMIN',
+  MODERATOR: 'MODERATOR',
+  MEMBER: 'MEMBER'
+} as const
+
+export type Role = (typeof Role)[keyof typeof Role]
+
+
 export const TaskStatus = {
   TODO: 'TODO',
   DOING: 'DOING',

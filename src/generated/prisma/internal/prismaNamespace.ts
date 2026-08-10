@@ -403,8 +403,9 @@ export const ModelName = {
   Vote: 'Vote',
   World: 'World',
   WorldMember: 'WorldMember',
-  Task: 'Task',
-  Category: 'Category'
+  WorldBan: 'WorldBan',
+  Category: 'Category',
+  Task: 'Task'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -420,7 +421,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "poll" | "pollOption" | "vote" | "world" | "worldMember" | "task" | "category"
+    modelProps: "user" | "poll" | "pollOption" | "vote" | "world" | "worldMember" | "worldBan" | "category" | "task"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -868,77 +869,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    Task: {
-      payload: Prisma.$TaskPayload<ExtArgs>
-      fields: Prisma.TaskFieldRefs
+    WorldBan: {
+      payload: Prisma.$WorldBanPayload<ExtArgs>
+      fields: Prisma.WorldBanFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.TaskFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload> | null
+          args: Prisma.WorldBanFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldBanPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.TaskFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload>
+          args: Prisma.WorldBanFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldBanPayload>
         }
         findFirst: {
-          args: Prisma.TaskFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload> | null
+          args: Prisma.WorldBanFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldBanPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.TaskFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload>
+          args: Prisma.WorldBanFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldBanPayload>
         }
         findMany: {
-          args: Prisma.TaskFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload>[]
+          args: Prisma.WorldBanFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldBanPayload>[]
         }
         create: {
-          args: Prisma.TaskCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload>
+          args: Prisma.WorldBanCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldBanPayload>
         }
         createMany: {
-          args: Prisma.TaskCreateManyArgs<ExtArgs>
+          args: Prisma.WorldBanCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.TaskCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload>[]
+          args: Prisma.WorldBanCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldBanPayload>[]
         }
         delete: {
-          args: Prisma.TaskDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload>
+          args: Prisma.WorldBanDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldBanPayload>
         }
         update: {
-          args: Prisma.TaskUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload>
+          args: Prisma.WorldBanUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldBanPayload>
         }
         deleteMany: {
-          args: Prisma.TaskDeleteManyArgs<ExtArgs>
+          args: Prisma.WorldBanDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.TaskUpdateManyArgs<ExtArgs>
+          args: Prisma.WorldBanUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.TaskUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload>[]
+          args: Prisma.WorldBanUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldBanPayload>[]
         }
         upsert: {
-          args: Prisma.TaskUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload>
+          args: Prisma.WorldBanUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldBanPayload>
         }
         aggregate: {
-          args: Prisma.TaskAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateTask>
+          args: Prisma.WorldBanAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateWorldBan>
         }
         groupBy: {
-          args: Prisma.TaskGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TaskGroupByOutputType>[]
+          args: Prisma.WorldBanGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WorldBanGroupByOutputType>[]
         }
         count: {
-          args: Prisma.TaskCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TaskCountAggregateOutputType> | number
+          args: Prisma.WorldBanCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WorldBanCountAggregateOutputType> | number
         }
       }
     }
@@ -1013,6 +1014,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CategoryCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CategoryCountAggregateOutputType> | number
+        }
+      }
+    }
+    Task: {
+      payload: Prisma.$TaskPayload<ExtArgs>
+      fields: Prisma.TaskFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TaskFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TaskFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload>
+        }
+        findFirst: {
+          args: Prisma.TaskFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TaskFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload>
+        }
+        findMany: {
+          args: Prisma.TaskFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload>[]
+        }
+        create: {
+          args: Prisma.TaskCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload>
+        }
+        createMany: {
+          args: Prisma.TaskCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TaskCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload>[]
+        }
+        delete: {
+          args: Prisma.TaskDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload>
+        }
+        update: {
+          args: Prisma.TaskUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload>
+        }
+        deleteMany: {
+          args: Prisma.TaskDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TaskUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TaskUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload>[]
+        }
+        upsert: {
+          args: Prisma.TaskUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPayload>
+        }
+        aggregate: {
+          args: Prisma.TaskAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTask>
+        }
+        groupBy: {
+          args: Prisma.TaskGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TaskGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TaskCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TaskCountAggregateOutputType> | number
         }
       }
     }
@@ -1095,18 +1170,42 @@ export type VoteScalarFieldEnum = (typeof VoteScalarFieldEnum)[keyof typeof Vote
 export const WorldScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  inviteCode: 'inviteCode'
+  inviteCode: 'inviteCode',
+  ownerId: 'ownerId'
 } as const
 
 export type WorldScalarFieldEnum = (typeof WorldScalarFieldEnum)[keyof typeof WorldScalarFieldEnum]
 
 
 export const WorldMemberScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  worldId: 'worldId',
+  role: 'role'
+} as const
+
+export type WorldMemberScalarFieldEnum = (typeof WorldMemberScalarFieldEnum)[keyof typeof WorldMemberScalarFieldEnum]
+
+
+export const WorldBanScalarFieldEnum = {
+  id: 'id',
   userId: 'userId',
   worldId: 'worldId'
 } as const
 
-export type WorldMemberScalarFieldEnum = (typeof WorldMemberScalarFieldEnum)[keyof typeof WorldMemberScalarFieldEnum]
+export type WorldBanScalarFieldEnum = (typeof WorldBanScalarFieldEnum)[keyof typeof WorldBanScalarFieldEnum]
+
+
+export const CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  color: 'color',
+  worldId: 'worldId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
 
 
 export const TaskScalarFieldEnum = {
@@ -1125,18 +1224,6 @@ export const TaskScalarFieldEnum = {
 } as const
 
 export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
-
-
-export const CategoryScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  color: 'color',
-  worldId: 'worldId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1194,6 +1281,20 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Role'
+ */
+export type EnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role'>
+    
+
+
+/**
+ * Reference to a field of type 'Role[]'
+ */
+export type ListEnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role[]'>
     
 
 
@@ -1402,8 +1503,9 @@ export type GlobalOmitConfig = {
   vote?: Prisma.VoteOmit
   world?: Prisma.WorldOmit
   worldMember?: Prisma.WorldMemberOmit
-  task?: Prisma.TaskOmit
+  worldBan?: Prisma.WorldBanOmit
   category?: Prisma.CategoryOmit
+  task?: Prisma.TaskOmit
 }
 
 /* Types for Logging */
