@@ -102,6 +102,16 @@ export class WorldsService {
           include: { user: { select: { id: true, nickname: true } } },
         },
         categories: true,
+        tasks: true, // Adicionado aqui
+        polls: {     // Adicionado aqui com as opções e votos
+          include: {
+            options: {
+              include: {
+                votes: true,
+              },
+            },
+          },
+        },
       },
     });
 
@@ -186,7 +196,7 @@ export class WorldsService {
 
     // Remove dos membros e adiciona na tabela de banidos
     await this.prisma.worldMember.delete({
-      where: { userId_worldId: { userId: targetUserId, worldId } },
+        where: { userId_worldId: { userId: targetUserId, worldId } },
     }).catch(() => {});
 
     return this.prisma.worldBan.create({

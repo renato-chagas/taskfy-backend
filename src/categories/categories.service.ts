@@ -13,15 +13,18 @@ export class CategoriesService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createCategoryDto: CreateCategoryDto) {
-    // Extraímos o worldId junto com name e color
     const { name, color, worldId } = createCategoryDto;
 
-    const existingCategory = await this.prisma.category.findUnique({
-      where: { name },
+    // CORREÇÃO AQUI: Verifica se o nome existe apenas NESTE mundo
+    const existingCategory = await this.prisma.category.findFirst({
+      where: {
+        name,
+        worldId,
+      },
     });
 
     if (existingCategory) {
-      throw new ConflictException('Já existe uma categoria com esse nome.');
+      throw new ConflictException('Já existe uma categoria com esse nome neste mundo.');
     }
 
     return this.prisma.category.create({
@@ -62,7 +65,7 @@ export class CategoriesService {
   }
 
   async update(id: string, updateCategoryDto: UpdateCategoryDto) {
-    await this.findOne(id);
+    const category = await this.findOne(id); // Já busca a categoria atual
 
     const { name, color, worldId } = updateCategoryDto as any;
 
@@ -70,6 +73,7 @@ export class CategoriesService {
       const existingCategory = await this.prisma.category.findFirst({
         where: {
           name,
+          worldId: category.worldId, // Usa o worldId da categoria atual
           NOT: {
             id,
           },
@@ -77,7 +81,7 @@ export class CategoriesService {
       });
 
       if (existingCategory) {
-        throw new ConflictException('Já existe uma categoria com esse nome.');
+        throw new ConflictException('Já existe uma categoria com esse nome neste mundo.');
       }
     }
 
@@ -86,11 +90,6 @@ export class CategoriesService {
       data: {
         name,
         color,
-        ...(worldId && {
-          world: {
-            connect: { id: worldId },
-          },
-        }),
       },
     });
   }
