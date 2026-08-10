@@ -20,7 +20,8 @@ export class WorldsController {
 
   @Post()
   createWorld(@Request() req, @Body('name') name: string) {
-    return this.worldsService.createWorld(req.user.sub, name);
+    const userId = req.user.sub || req.user.id || req.user.userId;
+    return this.worldsService.createWorld(userId, name);
   }
 
   @Get(':id')
