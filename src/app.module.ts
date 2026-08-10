@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { PrismaModule } from './prisma/prisma.module';
 
 import { CategoriesModule } from './categories/categories.module';
 import { TasksModule } from './tasks/tasks.module';
+import { AuthModule } from './auth/auth.module';
+import { WorldsModule } from './worlds/worlds.module';
+import { PollsModule } from './polls/polls.module';
 
 @Module({
   imports: [
@@ -11,9 +13,11 @@ import { TasksModule } from './tasks/tasks.module';
       isGlobal: true,
     }),
 
-    PrismaModule,
-    CategoriesModule,
+    AuthModule,
+    WorldsModule,
     TasksModule,
+    CategoriesModule,
+    PollsModule,
   ],
 })
 export class AppModule {}

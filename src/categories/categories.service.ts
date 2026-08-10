@@ -2,6 +2,7 @@ import {
   ConflictException,
   Injectable,
   NotFoundException,
+  ForbiddenException, // <-- Adicionado
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -12,7 +13,8 @@ export class CategoriesService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createCategoryDto: CreateCategoryDto) {
-    const { name, color } = createCategoryDto;
+    // Extraímos o worldId junto com name e color
+    const { name, color, worldId } = createCategoryDto;
 
     const existingCategory = await this.prisma.category.findUnique({
       where: { name },
@@ -26,12 +28,21 @@ export class CategoriesService {
       data: {
         name,
         color,
+        world: {
+          connect: { id: worldId },
+        },
       },
     });
   }
 
-  async findAll() {
+  // Agora recebe o worldId para não misturar as categorias
+  async findAll(worldId: string) {
+    if (!worldId) {
+      throw new ForbiddenException('O ID do mundo é obrigatório para listar as categorias.');
+    }
+
     return this.prisma.category.findMany({
+      where: { worldId },
       orderBy: {
         name: 'asc',
       },
@@ -53,7 +64,7 @@ export class CategoriesService {
   async update(id: string, updateCategoryDto: UpdateCategoryDto) {
     await this.findOne(id);
 
-    const { name, color } = updateCategoryDto;
+    const { name, color, worldId } = updateCategoryDto as any;
 
     if (name) {
       const existingCategory = await this.prisma.category.findFirst({
@@ -75,6 +86,11 @@ export class CategoriesService {
       data: {
         name,
         color,
+        ...(worldId && {
+          world: {
+            connect: { id: worldId },
+          },
+        }),
       },
     });
   }

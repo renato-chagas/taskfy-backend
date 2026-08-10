@@ -1,8 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider     = "prisma-client"
   output       = "../src/generated/prisma"
@@ -13,17 +11,86 @@ datasource db {
   provider = "postgresql"
 }
 
+model User {
+  id       String  @id @default(cuid())
+  nickname String  @unique
+  password String  // Senha criptografada (bcrypt)
+  
+  worlds   WorldMember[] // Mundos que o jogador participa
+  tasks    Task[]        // Tarefas que ele assumiu
+  votes     Vote[]
+}
+
+model Poll {
+  id        String      @id @default(cuid())
+  question  String
+  worldId   String
+  world     World       @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  options   PollOption[]
+  createdAt DateTime    @default(now())
+}
+
+model PollOption {
+  id     String @id @default(cuid())
+  text   String
+  pollId String
+  poll   Poll   @relation(fields: [pollId], references: [id], onDelete: Cascade)
+  votes  Vote[]
+}
+
+model Vote {
+  id       String     @id @default(cuid())
+  optionId String
+  option   PollOption @relation(fields: [optionId], references: [id], onDelete: Cascade)
+  userId   String
+  user     User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, optionId]) // Garante que o usuário vota apenas uma vez por opção/enquete
+}
+
+model World {
+  id         String   @id @default(cuid())
+  name       String
+  inviteCode String   @unique @default(cuid()) // O código que a pessoa vai usar para entrar
+  
+  members    WorldMember[]
+  categories Category[]
+  tasks      Task[]
+  polls     Poll[]
+}
+
+model WorldMember {
+  userId  String
+  worldId String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  world   World  @relation(fields: [worldId], references: [id], onDelete: Cascade)
+
+  @@id([userId, worldId])
+}
+
 model Task {
   id          String @id @default(cuid())
 
   title       String
   description String?
 
+  // Novo: Sistema de recursos
+  hasResources Boolean @default(false)
+  resources    String? // Pode salvar um texto ou um JSON com os blocos necessários
+
   status      TaskStatus   @default(TODO)
   priority    TaskPriority @default(MEDIUM)
 
   categoryId  String
   category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  // Novo: Ligação com o Mundo
+  worldId     String
+  world       World    @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  
+  // CORREÇÃO: Ligação com quem vai fazer a tarefa
+  assigneeId  String?
+  assignee    User?    @relation(fields: [assigneeId], references: [id], onDelete: SetNull)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -47,8 +114,12 @@ model Category {
   name      String   @unique
   color     String
 
+  worldId   String
+  world     World    @relation(fields: [worldId], references: [id], onDelete: Cascade)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   tasks Task[]
 }
+

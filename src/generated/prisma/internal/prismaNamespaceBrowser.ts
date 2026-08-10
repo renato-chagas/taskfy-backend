@@ -51,6 +51,12 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  User: 'User',
+  Poll: 'Poll',
+  PollOption: 'PollOption',
+  Vote: 'Vote',
+  World: 'World',
+  WorldMember: 'WorldMember',
   Task: 'Task',
   Category: 'Category'
 } as const
@@ -71,13 +77,71 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const UserScalarFieldEnum = {
+  id: 'id',
+  nickname: 'nickname',
+  password: 'password'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const PollScalarFieldEnum = {
+  id: 'id',
+  question: 'question',
+  worldId: 'worldId',
+  createdAt: 'createdAt'
+} as const
+
+export type PollScalarFieldEnum = (typeof PollScalarFieldEnum)[keyof typeof PollScalarFieldEnum]
+
+
+export const PollOptionScalarFieldEnum = {
+  id: 'id',
+  text: 'text',
+  pollId: 'pollId'
+} as const
+
+export type PollOptionScalarFieldEnum = (typeof PollOptionScalarFieldEnum)[keyof typeof PollOptionScalarFieldEnum]
+
+
+export const VoteScalarFieldEnum = {
+  id: 'id',
+  optionId: 'optionId',
+  userId: 'userId'
+} as const
+
+export type VoteScalarFieldEnum = (typeof VoteScalarFieldEnum)[keyof typeof VoteScalarFieldEnum]
+
+
+export const WorldScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  inviteCode: 'inviteCode'
+} as const
+
+export type WorldScalarFieldEnum = (typeof WorldScalarFieldEnum)[keyof typeof WorldScalarFieldEnum]
+
+
+export const WorldMemberScalarFieldEnum = {
+  userId: 'userId',
+  worldId: 'worldId'
+} as const
+
+export type WorldMemberScalarFieldEnum = (typeof WorldMemberScalarFieldEnum)[keyof typeof WorldMemberScalarFieldEnum]
+
+
 export const TaskScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
+  hasResources: 'hasResources',
+  resources: 'resources',
   status: 'status',
   priority: 'priority',
   categoryId: 'categoryId',
+  worldId: 'worldId',
+  assigneeId: 'assigneeId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -89,6 +153,7 @@ export const CategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
   color: 'color',
+  worldId: 'worldId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

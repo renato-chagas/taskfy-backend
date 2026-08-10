@@ -8,4 +8,9 @@ export class CreateCategoryDto {
 
   @IsHexColor()
   color!: string;
+
+  // --- Novo campo adicionado ---
+  @IsString()
+  @IsNotEmpty()
+  worldId!: string;
 }
