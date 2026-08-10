@@ -79,7 +79,7 @@ export class WorldsService {
     if (existingMember) {
       // Em vez de ConflictException, retornamos sucesso com o ID para o front redirecionar direto!
       return {
-        message: `Você já faz parte do mundo ${world.name}!`, 
+        message: `Você já faz parte do mundo ${world.name}!`,
         worldId: world.id
       };
     }

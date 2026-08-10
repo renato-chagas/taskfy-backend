@@ -1,11 +1,17 @@
-import { Controller, Get, Post, Body, Param, UseGuards, Request, Delete, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseGuards, Request, Delete, Req, Patch } from '@nestjs/common';
 import { WorldsService } from './worlds.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth-guard';
+import { Role } from '@prisma/client';
 
 @UseGuards(JwtAuthGuard)
 @Controller('worlds')
 export class WorldsController {
   constructor(private readonly worldsService: WorldsService) {}
+
+  @Post('join')
+  joinWorld(@Request() req, @Body('inviteCode') inviteCode: string) {
+    return this.worldsService.joinWorld(req.user.sub, inviteCode);
+  }
 
   @Get()
   getUserWorlds(@Request() req) {
@@ -17,23 +23,57 @@ export class WorldsController {
     return this.worldsService.createWorld(req.user.sub, name);
   }
 
-  @Post('join')
-  joinWorld(@Request() req, @Body('inviteCode') inviteCode: string) {
-    return this.worldsService.joinWorld(req.user.sub, inviteCode);
-  }
-
   @Get(':id')
   getWorldDetails(@Request() req, @Param('id') worldId: string) {
     return this.worldsService.getWorldDetails(worldId, req.user.sub);
   }
 
   @Delete(':id')
-  deleteWorld(
-    @Param('id') worldId: string, 
-    @Req() req: any) {
-    // Pega o ID do usuário logado pelo token JWT
-    const userId = req.user.sub || req.user.id; 
-    // Chama a função do Service que você já tinha criado
+  deleteWorld(@Param('id') worldId: string, @Req() req: any) {
+    const userId = req.user.sub || req.user.id;
     return this.worldsService.deleteWorld(worldId, userId);
+  }
+
+  // 1. Alterar o cargo de um membro
+  @Patch(':worldId/members/:userId/role')
+  updateMemberRole(
+    @Param('worldId') worldId: string,
+    @Param('userId') targetUserId: string,
+    @Body('role') newRole: Role,
+    @Request() req,
+  ) {
+    const requesterId = req.user.sub || req.user.id;
+    return this.worldsService.updateMemberRole(worldId, targetUserId, newRole, requesterId);
+  }
+
+  // 2. Banir um membro
+  @Post(':worldId/members/:userId/ban')
+  banMember(
+    @Param('worldId') worldId: string,
+    @Param('userId') targetUserId: string,
+    @Request() req,
+  ) {
+    const requesterId = req.user.sub || req.user.id;
+    return this.worldsService.banMember(worldId, targetUserId, requesterId);
+  }
+
+  // 3. Desbanir um membro
+  @Delete(':worldId/members/:userId/ban')
+  unbanMember(
+    @Param('worldId') worldId: string,
+    @Param('userId') targetUserId: string,
+    @Request() req,
+  ) {
+    const requesterId = req.user.sub || req.user.id;
+    return this.worldsService.unbanMember(worldId, targetUserId, requesterId);
+  }
+
+  @Get(':worldId/banned')
+  getBannedMembers(
+    @Param('worldId') worldId: string,
+    @Request() req,
+  ) {
+    const requesterId = req.user.sub || req.user.id;
+    return this.worldsService.getBannedMembers(worldId, requesterId);
   }
 }
